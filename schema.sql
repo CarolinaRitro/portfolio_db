@@ -28,13 +28,13 @@ CREATE TABLE institucion (
 );
 
 CREATE TABLE programa (
-  id_curso    INT IDENTITY(1,1) PRIMARY KEY,
+  id_programa    INT IDENTITY(1,1) PRIMARY KEY,
   nombre      NVARCHAR(200) NOT NULL,
   descripcion NVARCHAR(MAX) NULL,
   categoria   NVARCHAR(100) NULL,
   id_idioma     INT NOT NULL FOREIGN KEY REFERENCES idioma(id_idioma),
   id_estado     INT NOT NULL FOREIGN KEY REFERENCES estado_programa(id_estado),
-  id_tipo_programa INT NOT NULL FOREIGN KEY REFERENCES tipo_programa(id_tipo_programa),
+  id_tipo INT NOT NULL FOREIGN KEY REFERENCES tipo_programa(id_tipo),
   id_nivel      INT NULL  FOREIGN KEY REFERENCES nivel(id_nivel) 
 );
 
@@ -50,9 +50,10 @@ CREATE TABLE programa_institucion (
 
 CREATE INDEX ix_programa_idioma  ON programa(id_idioma);
 CREATE INDEX ix_programa_estado  ON programa(id_estado);
-CREATE INDEX ix_programa_tipo    ON programa(id_tipo_programa);
+CREATE INDEX ix_programa_tipo    ON programa(id_tipo);
 CREATE INDEX ix_programa_nivel   ON programa(id_nivel);
 CREATE INDEX ix_pi_programa      ON programa_institucion(id_programa);
+
 
 
 
